@@ -1,0 +1,15 @@
+export const dimens = {
+    spacingXs: 6,
+    spacingSm: 11,
+    spacingMd: 14,
+    spacingLg: 16,
+    spacingXl: 22,
+    radiusMd: 14,
+    radiusLg: 18,
+    borderWidth: 1,
+    titleFontSize: 28,
+    bodyFontSize: 15,
+    captionFontSize: 13,
+    swatchSize: 28,
+    minTouchTarget: 48,
+} as const;

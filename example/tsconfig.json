@@ -1,0 +1,47 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "react-native-bottom-tab-bar": [
+        "../src/index.ts"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react/*": [
+        "./node_modules/@types/react/*"
+      ],
+      "react-native": [
+        "./node_modules/react-native"
+      ],
+      "@react-navigation/*": [
+        "./node_modules/@react-navigation/*"
+      ],
+      "react-native-reanimated": [
+        "./node_modules/react-native-reanimated"
+      ],
+      "react-native-safe-area-context": [
+        "./node_modules/react-native-safe-area-context"
+      ],
+      "react-native-gesture-handler": [
+        "./node_modules/react-native-gesture-handler"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../src/**/*.ts",
+    "../src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "../node_modules",
+    "../lib",
+    "../src/**/*.test.ts"
+  ]
+}

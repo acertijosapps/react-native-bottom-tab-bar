@@ -1,0 +1,1 @@
+export { useTabSwipeGesture } from './useTabSwipeGesture';
