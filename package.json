@@ -43,6 +43,14 @@
   ],
   "author": "BGoswaldo <bgoswaldo@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/acertijoslibs/rnbottomtabbar.git"
+  },
+  "homepage": "https://gitlab.com/acertijoslibs/rnbottomtabbar#readme",
+  "bugs": {
+    "url": "https://gitlab.com/acertijoslibs/rnbottomtabbar/-/issues"
+  },
   "peerDependencies": {
     "@react-navigation/bottom-tabs": ">=7.0.0",
     "@react-navigation/native": ">=7.0.0",

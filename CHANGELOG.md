@@ -18,3 +18,4 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 - Soporte de `tabBarRepeatedPressBehavior` (`scrollToTop` / `popToTop`) en el `tabPress`, como la barra de bottom-tabs 7.20.
 - `SwipeableTabScreen`: cambio de tab por swipe horizontal sobre el contenido, vía `screenLayout`. Prop `isSwipeEnabled`, desactivada por default. La pantalla sigue al dedo durante el gesto, con resistencia en los bordes y regreso animado si el swipe no alcanza. Requiere `react-native-gesture-handler` (peer, `>=2.0.0`) y `@react-navigation/native` (peer, `>=7.0.0`).
 - App de ejemplo con Expo SDK 57 en `example/`.
+- Capturas del componente (paleta clara y oscura) en el README.

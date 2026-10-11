@@ -2,6 +2,11 @@
 
 Barra de tabs flotante y animada para [React Navigation](https://reactnavigation.org/) (`@react-navigation/bottom-tabs` v7), construida sobre Reanimated.
 
+<p align="center">
+  <img src="docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
+  <img src="docs/images/bottom-tab-bar-dark.png" alt="BottomTabBar con paleta oscura y la tab Eventos activa" width="400" />
+</p>
+
 - Barra flotante centrada con borde, sombra y esquinas redondeadas.
 - La tab activa muestra su icono dentro de una píldora de color (animación `ZoomIn`); las inactivas muestran icono + etiqueta (`FadeIn`).
 - Respeta el safe-area inferior.
