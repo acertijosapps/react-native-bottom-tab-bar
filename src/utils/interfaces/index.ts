@@ -1,1 +1,1 @@
-export type { FloatingTabBarColors } from './floatingTabBarColors';
+export type { BottomTabBarColors } from './bottomTabBarColors';

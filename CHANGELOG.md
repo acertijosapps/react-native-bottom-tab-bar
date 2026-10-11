@@ -10,7 +10,7 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 
 ### Added
 
-- `FloatingTabBar`: barra de tabs flotante para `@react-navigation/bottom-tabs` v7, extraída de Insumia.
+- `BottomTabBar`: barra de tabs flotante para `@react-navigation/bottom-tabs` v7, extraída de Insumia.
 - Colores configurables por la prop `colors`, con `defaultColors` exportado.
 - Props `labelFontFamily` y `animationDuration`.
 - Soporte de `tabBarLabel`, `tabBarAccessibilityLabel`, `tabBarButtonTestID` y `tabBarAllowFontScaling`.

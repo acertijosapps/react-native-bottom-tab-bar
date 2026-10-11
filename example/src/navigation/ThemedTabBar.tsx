@@ -1,13 +1,13 @@
 import { usePalette } from '@/context/palette';
 
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { FloatingTabBar } from 'react-native-bottom-tab-bar';
+import { BottomTabBar } from 'react-native-bottom-tab-bar';
 
 const ThemedTabBar = (props: BottomTabBarProps): React.JSX.Element => {
     const { palette } = usePalette();
 
     return (
-        <FloatingTabBar
+        <BottomTabBar
             {...props}
             colors={palette}
         />

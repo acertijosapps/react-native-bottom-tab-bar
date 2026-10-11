@@ -1,6 +1,6 @@
-import type { FloatingTabBarColors } from 'react-native-bottom-tab-bar';
+import type { BottomTabBarColors } from 'react-native-bottom-tab-bar';
 
-export type Palette = FloatingTabBarColors & {
+export type Palette = BottomTabBarColors & {
     text: string;
     statusBarStyle: 'light' | 'dark';
 };

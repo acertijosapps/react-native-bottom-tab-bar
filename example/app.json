@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "FloatingTabBar Example",
+    "name": "BottomTabBar Example",
     "slug": "react-native-bottom-tab-bar-example",
     "version": "1.0.0",
     "orientation": "portrait",

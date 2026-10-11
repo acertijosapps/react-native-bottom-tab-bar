@@ -1,33 +1,33 @@
 import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import type { BottomTabBarProps as NavigationBottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { dimens } from '../../../styles';
-import type { FloatingTabBarColors } from '../../../utils/interfaces';
+import type { BottomTabBarColors } from '../../../utils/interfaces';
 import {
     mergeColors,
     resolveRepeatedPressBehavior,
     resolveTabLabel,
     shouldNavigateOnPress,
 } from '../../../utils/tabBar';
-import FloatingTabBarItem from './FloatingTabBarItem';
+import BottomTabBarItem from './BottomTabBarItem';
 
-export type FloatingTabBarProps = BottomTabBarProps & {
-    colors?: Partial<FloatingTabBarColors>;
+export type BottomTabBarProps = NavigationBottomTabBarProps & {
+    colors?: Partial<BottomTabBarColors>;
     labelFontFamily?: string;
     animationDuration?: number;
 };
 
-const FloatingTabBar = ({
+const BottomTabBar = ({
     state,
     descriptors,
     navigation,
     colors,
     labelFontFamily,
     animationDuration = dimens.selectAnimationMs,
-}: FloatingTabBarProps): React.JSX.Element => {
+}: BottomTabBarProps): React.JSX.Element => {
     const insets = useSafeAreaInsets();
 
     const palette = useMemo(() => mergeColors(colors), [colors]);
@@ -77,7 +77,7 @@ const FloatingTabBar = ({
                     };
 
                     return (
-                        <FloatingTabBarItem
+                        <BottomTabBarItem
                             key={route.key}
                             label={resolveTabLabel(options, route.name)}
                             icon={icon}
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FloatingTabBar;
+export default BottomTabBar;

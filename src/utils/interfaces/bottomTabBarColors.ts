@@ -1,4 +1,4 @@
-export type FloatingTabBarColors = {
+export type BottomTabBarColors = {
     background: string;
     surface: string;
     border: string;

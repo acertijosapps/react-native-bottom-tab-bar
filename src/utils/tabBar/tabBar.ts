@@ -1,7 +1,7 @@
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
 import { defaultColors } from '../../styles';
-import type { FloatingTabBarColors } from '../interfaces';
+import type { BottomTabBarColors } from '../interfaces';
 
 type TabLabelOptions = Pick<BottomTabNavigationOptions, 'title' | 'tabBarLabel'>;
 
@@ -35,7 +35,7 @@ export const resolveRepeatedPressBehavior = (
     popToTop: isFocused && options.tabBarRepeatedPressBehavior?.popToTop !== false,
 });
 
-export const mergeColors = (overrides?: Partial<FloatingTabBarColors>): FloatingTabBarColors => ({
+export const mergeColors = (overrides?: Partial<BottomTabBarColors>): BottomTabBarColors => ({
     ...defaultColors,
     ...overrides,
 });

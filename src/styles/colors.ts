@@ -1,6 +1,6 @@
-import type { FloatingTabBarColors } from '../utils/interfaces';
+import type { BottomTabBarColors } from '../utils/interfaces';
 
-export const defaultColors: FloatingTabBarColors = {
+export const defaultColors: BottomTabBarColors = {
     background: '#F4F1EA',
     surface: '#FFFFFF',
     border: '#E1E5E2',

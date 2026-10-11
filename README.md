@@ -29,11 +29,11 @@ Declara la función `tabBar` **fuera** del render del navegador para no recrear 
 ```tsx
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FloatingTabBar } from 'react-native-bottom-tab-bar';
+import { BottomTabBar } from 'react-native-bottom-tab-bar';
 
 const Tabs = createBottomTabNavigator();
 
-const renderTabBar = (props: BottomTabBarProps) => <FloatingTabBar {...props} />;
+const renderTabBar = (props: BottomTabBarProps) => <BottomTabBar {...props} />;
 
 export const AppTabs = () => (
     <Tabs.Navigator
@@ -55,7 +55,7 @@ Pasa solo las claves que quieras cambiar; el resto toma `defaultColors`.
 
 ```tsx
 const renderTabBar = (props: BottomTabBarProps) => (
-    <FloatingTabBar
+    <BottomTabBar
         {...props}
         colors={{ accent: '#4F7A57', onAccent: '#F2F6EC' }}
         labelFontFamily="Manrope-SemiBold"
@@ -70,7 +70,7 @@ const ThemedTabBar = (props: BottomTabBarProps): React.JSX.Element => {
     const { theme } = useUnistyles();
 
     return (
-        <FloatingTabBar
+        <BottomTabBar
             {...props}
             colors={theme.colors}
             labelFontFamily={theme.fontFamily.sansSemiBold}
@@ -118,13 +118,13 @@ const renderScreenLayout = (props: SwipeableTabScreenProps) => (
 
 ## API
 
-### `<FloatingTabBar />`
+### `<BottomTabBar />`
 
 Recibe todas las `BottomTabBarProps` de React Navigation, más:
 
 | Prop | Tipo | Default | Descripción |
 | :--- | :--- | :--- | :--- |
-| `colors` | `Partial<FloatingTabBarColors>` | `defaultColors` | Colores de la barra; se mezclan con los defaults. |
+| `colors` | `Partial<BottomTabBarColors>` | `defaultColors` | Colores de la barra; se mezclan con los defaults. |
 | `labelFontFamily` | `string` | fuente del sistema, peso `600` | Familia tipográfica de las etiquetas. |
 | `animationDuration` | `number` | `220` | Duración en ms de la animación al seleccionar. |
 
@@ -150,7 +150,7 @@ dirección. En la primera y la última tab, el swipe hacia afuera no hace nada.
 | `tabBarAllowFontScaling` | Escalado de fuente de la etiqueta. |
 | `tabBarRepeatedPressBehavior` | `scrollToTop` / `popToTop` al tocar de nuevo la tab activa (bottom-tabs ≥ 7.20). |
 
-### `FloatingTabBarColors`
+### `BottomTabBarColors`
 
 | Clave | Default | Dónde se usa |
 | :--- | :--- | :--- |

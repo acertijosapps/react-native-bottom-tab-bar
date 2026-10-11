@@ -4,12 +4,12 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 
 import { dimens } from '../../../styles';
-import type { FloatingTabBarColors } from '../../../utils/interfaces';
+import type { BottomTabBarColors } from '../../../utils/interfaces';
 
-export type FloatingTabBarItemProps = {
+export type BottomTabBarItemProps = {
     label: string;
     icon: ReactNode;
-    colors: FloatingTabBarColors;
+    colors: BottomTabBarColors;
     isFocused: boolean;
     animationDuration: number;
     labelFontFamily?: string;
@@ -20,7 +20,7 @@ export type FloatingTabBarItemProps = {
     onLongPress: () => void;
 };
 
-const FloatingTabBarItem = ({
+const BottomTabBarItem = ({
     label,
     icon,
     colors,
@@ -32,7 +32,7 @@ const FloatingTabBarItem = ({
     testID,
     onPress,
     onLongPress,
-}: FloatingTabBarItemProps): React.JSX.Element => {
+}: BottomTabBarItemProps): React.JSX.Element => {
     const labelFont = labelFontFamily
         ? { fontFamily: labelFontFamily }
         : { fontWeight: dimens.labelFontWeight };
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FloatingTabBarItem;
+export default BottomTabBarItem;

@@ -3,7 +3,7 @@ import { ScreenContainer } from '@/components/frame/screenContainer';
 
 const HomeScreen = (): React.JSX.Element => (
     <ScreenContainer
-        title="FloatingTabBar"
+        title="BottomTabBar"
         subtitle="Barra de tabs flotante para React Navigation, sobre Reanimated."
     >
         <InfoCard
