@@ -3,8 +3,8 @@
 Barra de tabs flotante y animada para [React Navigation](https://reactnavigation.org/) (`@react-navigation/bottom-tabs` v7), construida sobre Reanimated.
 
 <p align="center">
-  <img src="docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
-  <img src="docs/images/bottom-tab-bar-dark.png" alt="BottomTabBar con paleta oscura y la tab Eventos activa" width="400" />
+  <img src="https://gitlab.com/acertijoslibs/rnbottomtabbar/-/raw/main/docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
+  <img src="https://gitlab.com/acertijoslibs/rnbottomtabbar/-/raw/main/docs/images/bottom-tab-bar-dark.png" alt="BottomTabBar con paleta oscura y la tab Eventos activa" width="400" />
 </p>
 
 - Barra flotante centrada con borde, sombra y esquinas redondeadas.
@@ -191,6 +191,14 @@ por contexto).
 
 `example/metro.config.js` resuelve la librería desde `../src` y bloquea el `node_modules` de la raíz
 para que React y los peers se carguen una sola vez.
+
+## Autor
+
+Hecho por [AcertijosApps](https://acertijosapps.com/librerias). Conoce el resto de nuestras
+librerías en [acertijosapps.com/librerias](https://acertijosapps.com/librerias).
+
+Dudas o propuestas: [acertijos.contacto@gmail.com](mailto:acertijos.contacto@gmail.com) o abre un
+[issue](https://gitlab.com/acertijoslibs/rnbottomtabbar/-/issues).
 
 ## Licencia
 
