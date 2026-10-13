@@ -1,6 +1,8 @@
-# react-native-bottom-tab-bar
+# @acertijosapps/react-native-bottom-tab-bar
 
 Barra de tabs flotante y animada para [React Navigation](https://reactnavigation.org/) (`@react-navigation/bottom-tabs` v7), construida sobre Reanimated.
+
+Página de la librería: [acertijosapps.com/librerias/react-native-bottom-tab-bar](https://acertijosapps.com/librerias/react-native-bottom-tab-bar)
 
 <p align="center">
   <img src="https://gitlab.com/acertijoslibs/rnbottomtabbar/-/raw/main/docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
@@ -18,7 +20,7 @@ Barra de tabs flotante y animada para [React Navigation](https://reactnavigation
 ## Instalación
 
 ```bash
-yarn add react-native-bottom-tab-bar
+yarn add @acertijosapps/react-native-bottom-tab-bar
 ```
 
 Dependencias peer (ya las tienes si usas bottom-tabs y Reanimated):
@@ -34,7 +36,7 @@ Declara la función `tabBar` **fuera** del render del navegador para no recrear 
 ```tsx
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomTabBar } from 'react-native-bottom-tab-bar';
+import { BottomTabBar } from '@acertijosapps/react-native-bottom-tab-bar';
 
 const Tabs = createBottomTabNavigator();
 
@@ -102,8 +104,8 @@ Está **desactivado por default**: actívalo con `isSwipeEnabled`.
 La app debe estar envuelta en `GestureHandlerRootView`.
 
 ```tsx
-import type { SwipeableTabScreenProps } from 'react-native-bottom-tab-bar';
-import { SwipeableTabScreen } from 'react-native-bottom-tab-bar';
+import type { SwipeableTabScreenProps } from '@acertijosapps/react-native-bottom-tab-bar';
+import { SwipeableTabScreen } from '@acertijosapps/react-native-bottom-tab-bar';
 
 const renderScreenLayout = (props: SwipeableTabScreenProps) => (
     <SwipeableTabScreen

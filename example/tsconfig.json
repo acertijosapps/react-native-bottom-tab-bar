@@ -6,7 +6,7 @@
       "@/*": [
         "./src/*"
       ],
-      "react-native-bottom-tab-bar": [
+      "@acertijosapps/react-native-bottom-tab-bar": [
         "../src/index.ts"
       ],
       "react": [

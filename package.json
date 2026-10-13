@@ -1,5 +1,5 @@
 {
-  "name": "react-native-bottom-tab-bar",
+  "name": "@acertijosapps/react-native-bottom-tab-bar",
   "version": "1.0.0",
   "description": "Floating, animated bottom tab bar for React Navigation (bottom-tabs v7) built on Reanimated.",
   "main": "./lib/module/index.js",
@@ -18,6 +18,9 @@
     "!**/*.test.*"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "bob build",
     "typecheck": "tsc --noEmit",
@@ -47,7 +50,7 @@
     "type": "git",
     "url": "git+https://gitlab.com/acertijoslibs/rnbottomtabbar.git"
   },
-  "homepage": "https://gitlab.com/acertijoslibs/rnbottomtabbar#readme",
+  "homepage": "https://acertijosapps.com/librerias/react-native-bottom-tab-bar",
   "bugs": {
     "url": "https://gitlab.com/acertijoslibs/rnbottomtabbar/-/issues"
   },

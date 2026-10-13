@@ -1,7 +1,7 @@
 import { useSwipe } from '@/context/swipe';
 
-import type { SwipeableTabScreenProps } from 'react-native-bottom-tab-bar';
-import { SwipeableTabScreen } from 'react-native-bottom-tab-bar';
+import type { SwipeableTabScreenProps } from '@acertijosapps/react-native-bottom-tab-bar';
+import { SwipeableTabScreen } from '@acertijosapps/react-native-bottom-tab-bar';
 
 const SwipeScreenLayout = ({
     children,

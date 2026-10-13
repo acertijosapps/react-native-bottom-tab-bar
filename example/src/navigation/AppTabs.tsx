@@ -4,7 +4,7 @@ import { SettingsScreen } from '@/features/settings';
 
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import type { SwipeableTabScreenProps } from 'react-native-bottom-tab-bar';
+import type { SwipeableTabScreenProps } from '@acertijosapps/react-native-bottom-tab-bar';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
