@@ -1,4 +1,4 @@
-import type { BottomTabBarColors } from 'react-native-bottom-tab-bar';
+import type { BottomTabBarColors } from '@acertijosapps/react-native-bottom-tab-bar';
 
 export type Palette = BottomTabBarColors & {
     text: string;
