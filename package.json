@@ -48,11 +48,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/acertijoslibs/rnbottomtabbar.git"
+    "url": "git+https://github.com/acertijosapps/react-native-bottom-tab-bar.git"
   },
   "homepage": "https://acertijosapps.com/librerias/react-native-bottom-tab-bar",
   "bugs": {
-    "url": "https://gitlab.com/acertijoslibs/rnbottomtabbar/-/issues"
+    "url": "https://github.com/acertijosapps/react-native-bottom-tab-bar/issues"
   },
   "peerDependencies": {
     "@react-navigation/bottom-tabs": ">=7.0.0",
