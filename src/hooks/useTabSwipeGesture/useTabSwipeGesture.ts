@@ -5,8 +5,13 @@ import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Gesture } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import { getHiddenRouteKeys, subscribeHiddenRouteKeys } from '../../store/hiddenTabs';
 import { dimens } from '../../styles';
-import { resolveSwipeDragOffset, resolveSwipeTargetIndex } from '../../utils/tabSwipe';
+import {
+    resolveSwipeDragOffset,
+    resolveSwipeNeighbors,
+    resolveSwipeTargetIndex,
+} from '../../utils/tabSwipe';
 
 export type TabSwipeGesture = {
     gesture: ReturnType<typeof Gesture.Pan>;
@@ -18,8 +23,8 @@ export const useTabSwipeGesture = (
     isEnabled: boolean,
 ): TabSwipeGesture => {
     const offsetX = useSharedValue(0);
-    const currentIndex = useSharedValue(0);
-    const routeCount = useSharedValue(0);
+    const previousIndex = useSharedValue<number | null>(null);
+    const nextIndex = useSharedValue<number | null>(null);
 
     const isRTL = I18nManager.isRTL;
 
@@ -28,18 +33,33 @@ export const useTabSwipeGesture = (
     }));
 
     useEffect(() => {
-        const syncState = () => {
+        const syncNeighbors = () => {
             const state = navigation.getState();
+            const neighbors = resolveSwipeNeighbors({
+                routeKeys: state.routes.map((route) => route.key),
+                currentIndex: state.index,
+                hiddenRouteKeys: getHiddenRouteKeys(state.key),
+            });
 
-            currentIndex.value = state.index;
-            routeCount.value = state.routes.length;
-            offsetX.value = 0;
+            previousIndex.value = neighbors.previousIndex;
+            nextIndex.value = neighbors.nextIndex;
         };
 
-        syncState();
+        const handleFocus = () => {
+            offsetX.value = 0;
+            syncNeighbors();
+        };
 
-        return navigation.addListener('focus', syncState);
-    }, [navigation, currentIndex, routeCount, offsetX]);
+        syncNeighbors();
+
+        const unsubscribeHiddenTabs = subscribeHiddenRouteKeys(syncNeighbors);
+        const unsubscribeFocus = navigation.addListener('focus', handleFocus);
+
+        return () => {
+            unsubscribeHiddenTabs();
+            unsubscribeFocus();
+        };
+    }, [navigation, previousIndex, nextIndex, offsetX]);
 
     useEffect(() => {
         if (!isEnabled) {
@@ -67,8 +87,8 @@ export const useTabSwipeGesture = (
                 .onUpdate((event) => {
                     'worklet';
                     offsetX.value = resolveSwipeDragOffset({
-                        currentIndex: currentIndex.value,
-                        routeCount: routeCount.value,
+                        previousIndex: previousIndex.value,
+                        nextIndex: nextIndex.value,
                         translationX: event.translationX,
                         isRTL,
                     });
@@ -76,8 +96,8 @@ export const useTabSwipeGesture = (
                 .onEnd((event) => {
                     'worklet';
                     const targetIndex = resolveSwipeTargetIndex({
-                        currentIndex: currentIndex.value,
-                        routeCount: routeCount.value,
+                        previousIndex: previousIndex.value,
+                        nextIndex: nextIndex.value,
                         translationX: event.translationX,
                         velocityX: event.velocityX,
                         isRTL,
@@ -97,7 +117,7 @@ export const useTabSwipeGesture = (
                         offsetX.value = withTiming(0, { duration: dimens.swipeResetMs });
                     }
                 }),
-        [isEnabled, isRTL, offsetX, currentIndex, routeCount, navigateToIndex],
+        [isEnabled, isRTL, offsetX, previousIndex, nextIndex, navigateToIndex],
     );
 
     return { gesture, animatedStyle };

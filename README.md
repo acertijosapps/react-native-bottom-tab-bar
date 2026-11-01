@@ -11,7 +11,8 @@ Página de la librería: [acertijosapps.com/librerias/react-native-bottom-tab-ba
 
 - Barra flotante centrada con borde, sombra y esquinas redondeadas.
 - La tab activa muestra su icono dentro de una píldora de color (animación `ZoomIn`); las inactivas muestran icono + etiqueta (`FadeIn`).
-- Respeta el safe-area inferior.
+- Respeta el safe-area inferior y los laterales (notch en horizontal).
+- Badges con `tabBarBadge`, tabs ocultas y barra oculta por pantalla o con el teclado.
 - Emite `tabPress` (cancelable) y `tabLongPress`, igual que la barra nativa de React Navigation.
 - Accesible: `tablist` / `tab`, `selected` y `accessibilityLabel` por tab.
 - Colores configurables, sin depender de ningún sistema de temas.
@@ -23,7 +24,8 @@ Página de la librería: [acertijosapps.com/librerias/react-native-bottom-tab-ba
 yarn add @acertijosapps/react-native-bottom-tab-bar
 ```
 
-Dependencias peer (ya las tienes si usas bottom-tabs y Reanimated):
+Dependencias peer (ya las tienes si usas bottom-tabs y Reanimated). React Navigation debe ser v7;
+algunas opciones piden bottom-tabs ≥ 7.20 (se indican en la tabla de opciones):
 
 ```bash
 yarn add @react-navigation/native @react-navigation/bottom-tabs react-native-reanimated react-native-safe-area-context react-native-gesture-handler
@@ -144,7 +146,8 @@ Recibe todas las `BottomTabBarProps` de React Navigation, más:
 | `isSwipeEnabled` | `boolean` | `false` | Activa el cambio de tab por swipe horizontal. |
 
 El cambio ocurre si el gesto recorre al menos 60 pt o termina con velocidad ≥ 500 pt/s en la misma
-dirección. En la primera y la última tab, el swipe hacia afuera no hace nada.
+dirección. En la primera y la última tab, el swipe hacia afuera no hace nada. Las tabs ocultas
+(ver abajo) se saltan: el swipe va a la siguiente tab visible.
 
 ### Opciones de pantalla que se respetan
 
@@ -154,8 +157,15 @@ dirección. En la primera y la última tab, el swipe hacia afuera no hace nada.
 | `tabBarLabel` (string) · `title` | Etiqueta, en ese orden de prioridad; si no hay ninguna, el nombre de la ruta. |
 | `tabBarAccessibilityLabel` | Etiqueta del lector de pantalla; por defecto, la etiqueta visible. |
 | `tabBarButtonTestID` | `testID` del botón de la tab. |
-| `tabBarAllowFontScaling` | Escalado de fuente de la etiqueta. |
+| `tabBarAllowFontScaling` | Escalado de fuente de la etiqueta; crece hasta 1.5× y se corta en una línea. |
 | `tabBarRepeatedPressBehavior` | `scrollToTop` / `popToTop` al tocar de nuevo la tab activa (bottom-tabs ≥ 7.20). |
+| `tabBarBadge` | Texto o número del badge sobre el icono; también lo lee el lector de pantalla. |
+| `tabBarBadgeStyle` | Estilo del badge (por ejemplo `backgroundColor` y `color`); se mezcla sobre `badge` / `onBadge`. |
+| `tabBarShowLabel: false` · `tabBarLabelVisibilityMode: 'unlabeled'` | Oculta las etiquetas de las tabs inactivas (`tabBarLabelVisibilityMode` pide bottom-tabs ≥ 7.20). |
+| `tabBarItemStyle: { display: 'none' }` | Oculta la tab de la barra; el swipe se la salta. |
+| `tabBarButton` | Botón propio de la tab; recibe las props del botón y el contenido en `children`. Si devuelve `null`, la tab se oculta. |
+| `tabBarStyle: { display: 'none' }` | Oculta la barra mientras esa pantalla tiene el foco. |
+| `tabBarHideOnKeyboard` | Oculta la barra mientras el teclado está abierto en esa pantalla. |
 
 ### `BottomTabBarColors`
 
@@ -168,6 +178,8 @@ dirección. En la primera y la última tab, el swipe hacia afuera no hace nada.
 | `onAccent` | `#FFF3E5` | Icono de la tab activa. |
 | `textMuted` | `#5E6E68` | Icono y etiqueta de las tabs inactivas. |
 | `shadow` | `#000000` | Color de la sombra. |
+| `badge` | `#C8302A` | Fondo del badge (opcional). |
+| `onBadge` | `#FFFFFF` | Texto del badge (opcional). |
 
 ## Desarrollo
 
@@ -187,9 +199,13 @@ yarn example install
 yarn example ios
 ```
 
-Tres tabs: **Inicio** (qué hace la barra), **Eventos** (cuenta `tabPress` y `tabLongPress`) y
-**Ajustes** (activa el swipe entre tabs y cambia `colors` en vivo, con el patrón de tema dinámico
-por contexto).
+Tres tabs visibles y una oculta:
+
+- **Inicio**: qué hace la barra, con un botón que abre la tab oculta.
+- **Detalle** (oculta): usa `tabBarItemStyle` y `tabBarStyle` con `display: 'none'`; el swipe se la salta.
+- **Eventos**: cuenta `tabPress` y `tabLongPress`; el badge de la tab muestra el conteo.
+- **Ajustes**: activa el swipe, cambia `colors` en vivo (patrón de tema dinámico por contexto) y
+  tiene un campo de texto para probar `tabBarHideOnKeyboard`.
 
 `example/metro.config.js` resuelve la librería desde `../src` y bloquea el `node_modules` de la raíz
 para que React y los peers se carguen una sola vez.

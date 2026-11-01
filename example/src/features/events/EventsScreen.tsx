@@ -27,6 +27,10 @@ const EventsScreen = ({ navigation }: EventsScreenProps): React.JSX.Element => {
         };
     }, [navigation]);
 
+    useEffect(() => {
+        navigation.setOptions({ tabBarBadge: pressCount > 0 ? pressCount : undefined });
+    }, [navigation, pressCount]);
+
     return (
         <ScreenContainer
             title="Eventos"
@@ -34,7 +38,7 @@ const EventsScreen = ({ navigation }: EventsScreenProps): React.JSX.Element => {
         >
             <InfoCard
                 title={`tabPress: ${pressCount}`}
-                description="Se emite en cada toque y se puede cancelar con event.preventDefault()."
+                description="Se emite en cada toque y se puede cancelar con event.preventDefault(). El badge de la tab muestra este conteo."
             />
             <InfoCard
                 title={`tabLongPress: ${longPressCount}`}

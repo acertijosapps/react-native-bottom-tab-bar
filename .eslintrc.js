@@ -9,7 +9,7 @@ module.exports = {
             {
                 groups: [
                     ['^\\u0000'],
-                    ['^react\\u0000?$', '^react-native(/|$)'],
+                    ['^react\\u0000?$', '^react-native(/.*)?\\u0000?$'],
                     ['^@?\\w'],
                     [
                         '^\\.\\.(?!/?$)',
