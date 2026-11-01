@@ -5,8 +5,8 @@ Barra de tabs flotante y animada para [React Navigation](https://reactnavigation
 Página de la librería: [acertijosapps.com/librerias/react-native-bottom-tab-bar](https://acertijosapps.com/librerias/react-native-bottom-tab-bar)
 
 <p align="center">
-  <img src="https://gitlab.com/acertijoslibs/rnbottomtabbar/-/raw/main/docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
-  <img src="https://gitlab.com/acertijoslibs/rnbottomtabbar/-/raw/main/docs/images/bottom-tab-bar-dark.png" alt="BottomTabBar con paleta oscura y la tab Eventos activa" width="400" />
+  <img src="https://raw.githubusercontent.com/acertijosapps/react-native-bottom-tab-bar/main/docs/images/bottom-tab-bar-light.png" alt="BottomTabBar con paleta clara y la tab Inicio activa" width="400" />
+  <img src="https://raw.githubusercontent.com/acertijosapps/react-native-bottom-tab-bar/main/docs/images/bottom-tab-bar-dark.png" alt="BottomTabBar con paleta oscura y la tab Eventos activa" width="400" />
 </p>
 
 - Barra flotante centrada con borde, sombra y esquinas redondeadas.
@@ -200,7 +200,7 @@ Hecho por [AcertijosApps](https://acertijosapps.com/librerias). Conoce el resto 
 librerías en [acertijosapps.com/librerias](https://acertijosapps.com/librerias).
 
 Dudas o propuestas: [acertijos.contacto@gmail.com](mailto:acertijos.contacto@gmail.com) o abre un
-[issue](https://gitlab.com/acertijoslibs/rnbottomtabbar/-/issues).
+[issue](https://github.com/acertijosapps/react-native-bottom-tab-bar/issues).
 
 ## Licencia
 

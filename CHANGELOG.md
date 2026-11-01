@@ -6,6 +6,10 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 
 ## [Unreleased]
 
+### Changed
+
+- El repositorio se movió a GitHub: [acertijosapps/react-native-bottom-tab-bar](https://github.com/acertijosapps/react-native-bottom-tab-bar). `repository`, `bugs` y las imágenes del README apuntan ahí.
+
 ## [1.0.0] - 2026-10-11
 
 ### Added
