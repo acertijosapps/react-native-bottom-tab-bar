@@ -1,2 +1,7 @@
-export type { SwipeDragInput, SwipeGestureInput } from './tabSwipe';
-export { resolveSwipeDragOffset, resolveSwipeTargetIndex } from './tabSwipe';
+export type {
+    SwipeDragInput,
+    SwipeGestureInput,
+    SwipeNeighbors,
+    SwipeNeighborsInput,
+} from './tabSwipe';
+export { resolveSwipeDragOffset, resolveSwipeNeighbors, resolveSwipeTargetIndex } from './tabSwipe';

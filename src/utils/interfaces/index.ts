@@ -1,1 +1,1 @@
-export type { BottomTabBarColors } from './bottomTabBarColors';
+export type { BottomTabBarColors, ResolvedBottomTabBarColors } from './bottomTabBarColors';

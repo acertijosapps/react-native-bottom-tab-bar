@@ -4,6 +4,7 @@ import type { PaletteName } from '@/context/palette';
 import { PALETTE_NAMES, palettes, usePalette } from '@/context/palette';
 import { useSwipe } from '@/context/swipe';
 
+import NoteInput from './NoteInput';
 import PaletteOption from './PaletteOption';
 import SwipeToggle from './SwipeToggle';
 
@@ -35,6 +36,7 @@ const SettingsScreen = (): React.JSX.Element => {
                     onPress={() => setPaletteName(name)}
                 />
             ))}
+            <NoteInput />
         </ScreenContainer>
     );
 };

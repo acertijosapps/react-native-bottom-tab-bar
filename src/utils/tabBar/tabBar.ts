@@ -1,11 +1,25 @@
+import type { ReactNode } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
 import { defaultColors } from '../../styles';
-import type { BottomTabBarColors } from '../interfaces';
+import type { BottomTabBarColors, ResolvedBottomTabBarColors } from '../interfaces';
 
 type TabLabelOptions = Pick<BottomTabNavigationOptions, 'title' | 'tabBarLabel'>;
 
 type RepeatedPressOptions = Pick<BottomTabNavigationOptions, 'tabBarRepeatedPressBehavior'>;
+
+type LabelVisibilityOptions = Pick<
+    BottomTabNavigationOptions,
+    'tabBarShowLabel' | 'tabBarLabelVisibilityMode'
+>;
+
+type TabBarVisibilityOptions = Pick<
+    BottomTabNavigationOptions,
+    'tabBarStyle' | 'tabBarHideOnKeyboard'
+>;
 
 export type RepeatedPressBehavior = {
     scrollToTop: boolean;
@@ -35,7 +49,28 @@ export const resolveRepeatedPressBehavior = (
     popToTop: isFocused && options.tabBarRepeatedPressBehavior?.popToTop !== false,
 });
 
-export const mergeColors = (overrides?: Partial<BottomTabBarColors>): BottomTabBarColors => ({
+export const mergeColors = (
+    overrides?: Partial<BottomTabBarColors>,
+): ResolvedBottomTabBarColors => ({
     ...defaultColors,
     ...overrides,
 });
+
+export const isStyleHidden = (style: StyleProp<ViewStyle>): boolean =>
+    StyleSheet.flatten(style)?.display === 'none';
+
+export const isNodeEmpty = (node: ReactNode): boolean =>
+    node === null || node === undefined || typeof node === 'boolean';
+
+export const shouldShowLabel = (options: LabelVisibilityOptions): boolean =>
+    options.tabBarShowLabel !== false && options.tabBarLabelVisibilityMode !== 'unlabeled';
+
+export const shouldHideTabBar = (
+    options: TabBarVisibilityOptions,
+    isKeyboardShown: boolean,
+): boolean =>
+    isStyleHidden(options.tabBarStyle as StyleProp<ViewStyle>) ||
+    (options.tabBarHideOnKeyboard === true && isKeyboardShown);
+
+export const resolveBadgeText = (badge?: number | string): string | null =>
+    badge === undefined ? null : String(badge);

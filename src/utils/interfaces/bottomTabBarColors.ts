@@ -6,4 +6,8 @@ export type BottomTabBarColors = {
     onAccent: string;
     textMuted: string;
     shadow: string;
+    badge?: string;
+    onBadge?: string;
 };
+
+export type ResolvedBottomTabBarColors = Required<BottomTabBarColors>;

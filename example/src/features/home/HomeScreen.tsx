@@ -1,7 +1,15 @@
+import { ActionButton } from '@/components/display/actionButton';
 import { InfoCard } from '@/components/display/infoCard';
 import { ScreenContainer } from '@/components/frame/screenContainer';
 
-const HomeScreen = (): React.JSX.Element => (
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+
+import type { AppTabsParamList } from '@/navigation/routes';
+import { ROUTES } from '@/navigation/routes';
+
+export type HomeScreenProps = BottomTabScreenProps<AppTabsParamList, typeof ROUTES.HOME_TAB>;
+
+const HomeScreen = ({ navigation }: HomeScreenProps): React.JSX.Element => (
     <ScreenContainer
         title="BottomTabBar"
         subtitle="Barra de tabs flotante para React Navigation, sobre Reanimated."
@@ -16,7 +24,11 @@ const HomeScreen = (): React.JSX.Element => (
         />
         <InfoCard
             title="Safe-area"
-            description="La barra respeta el inset inferior del dispositivo."
+            description="La barra respeta los insets inferior y laterales del dispositivo."
+        />
+        <InfoCard
+            title="Badge"
+            description="Toca la tab Eventos: su badge cuenta los toques con tabBarBadge."
         />
         <InfoCard
             title="Colores por prop"
@@ -25,6 +37,10 @@ const HomeScreen = (): React.JSX.Element => (
         <InfoCard
             title="Swipe entre tabs"
             description="Actívalo en Ajustes y desliza la pantalla a izquierda o derecha para cambiar de tab."
+        />
+        <ActionButton
+            label="Abrir la tab oculta"
+            onPress={() => navigation.navigate(ROUTES.DETAIL_TAB)}
         />
     </ScreenContainer>
 );

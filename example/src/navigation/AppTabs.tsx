@@ -1,10 +1,11 @@
+import { DetailScreen } from '@/features/detail';
 import { EventsScreen } from '@/features/events';
 import { HomeScreen } from '@/features/home';
 import { SettingsScreen } from '@/features/settings';
 
+import type { SwipeableTabScreenProps } from '@acertijosapps/react-native-bottom-tab-bar';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import type { SwipeableTabScreenProps } from '@acertijosapps/react-native-bottom-tab-bar';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
@@ -56,6 +57,15 @@ const AppTabs = (): React.JSX.Element => (
             options={{ title: 'Inicio', tabBarIcon: HomeIcon }}
         />
         <Tabs.Screen
+            name={ROUTES.DETAIL_TAB}
+            component={DetailScreen}
+            options={{
+                title: 'Detalle',
+                tabBarItemStyle: { display: 'none' },
+                tabBarStyle: { display: 'none' },
+            }}
+        />
+        <Tabs.Screen
             name={ROUTES.EVENTS_TAB}
             component={EventsScreen}
             options={{
@@ -67,7 +77,7 @@ const AppTabs = (): React.JSX.Element => (
         <Tabs.Screen
             name={ROUTES.SETTINGS_TAB}
             component={SettingsScreen}
-            options={{ title: 'Ajustes', tabBarIcon: SettingsIcon }}
+            options={{ title: 'Ajustes', tabBarIcon: SettingsIcon, tabBarHideOnKeyboard: true }}
         />
     </Tabs.Navigator>
 );
