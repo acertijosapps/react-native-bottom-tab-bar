@@ -1,86 +1,85 @@
 import type { ReactNode } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import type { TextStyle } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
 
 import { dimens } from '../../../styles';
-import type { BottomTabBarColors } from '../../../utils/interfaces';
+import type { ResolvedBottomTabBarColors } from '../../../utils/interfaces';
+import BottomTabBarIcon from './BottomTabBarIcon';
 
 export type BottomTabBarItemProps = {
     label: string;
     icon: ReactNode;
-    colors: BottomTabBarColors;
+    badge: string | null;
+    badgeStyle?: TextStyle;
+    colors: ResolvedBottomTabBarColors;
     isFocused: boolean;
+    isLabelVisible: boolean;
     animationDuration: number;
     labelFontFamily?: string;
     allowFontScaling?: boolean;
-    accessibilityLabel?: string;
-    testID?: string;
-    onPress: () => void;
-    onLongPress: () => void;
 };
 
 const BottomTabBarItem = ({
     label,
     icon,
+    badge,
+    badgeStyle,
     colors,
     isFocused,
+    isLabelVisible,
     animationDuration,
     labelFontFamily,
     allowFontScaling,
-    accessibilityLabel,
-    testID,
-    onPress,
-    onLongPress,
 }: BottomTabBarItemProps): React.JSX.Element => {
     const labelFont = labelFontFamily
         ? { fontFamily: labelFontFamily }
         : { fontWeight: dimens.labelFontWeight };
 
+    const tabIcon = (
+        <BottomTabBarIcon
+            icon={icon}
+            badge={badge}
+            badgeStyle={badgeStyle}
+            colors={colors}
+        />
+    );
+
+    if (isFocused) {
+        return (
+            <Animated.View
+                key="active"
+                entering={ZoomIn.duration(animationDuration)}
+                style={{ ...styles.itemActive, backgroundColor: colors.accent }}
+            >
+                {tabIcon}
+            </Animated.View>
+        );
+    }
+
     return (
-        <Pressable
-            accessibilityRole="tab"
-            accessibilityState={{ selected: isFocused }}
-            accessibilityLabel={accessibilityLabel ?? label}
-            testID={testID}
-            style={styles.item}
-            onPress={onPress}
-            onLongPress={onLongPress}
+        <Animated.View
+            key="inactive"
+            entering={FadeIn.duration(animationDuration)}
+            style={styles.itemInactive}
         >
-            {isFocused ? (
-                <Animated.View
-                    key="active"
-                    entering={ZoomIn.duration(animationDuration)}
-                    style={{ ...styles.itemActive, backgroundColor: colors.accent }}
+            {tabIcon}
+            {isLabelVisible ? (
+                <Text
+                    allowFontScaling={allowFontScaling}
+                    maxFontSizeMultiplier={dimens.labelMaxFontScale}
+                    numberOfLines={dimens.labelMaxLines}
+                    style={{ ...styles.label, ...labelFont, color: colors.textMuted }}
                 >
-                    {icon}
-                </Animated.View>
-            ) : (
-                <Animated.View
-                    key="inactive"
-                    entering={FadeIn.duration(animationDuration)}
-                    style={styles.itemInactive}
-                >
-                    {icon}
-                    <Text
-                        allowFontScaling={allowFontScaling}
-                        style={{ ...styles.label, ...labelFont, color: colors.textMuted }}
-                    >
-                        {label}
-                    </Text>
-                </Animated.View>
-            )}
-        </Pressable>
+                    {label}
+                </Text>
+            ) : null}
+        </Animated.View>
     );
 };
 
 const styles = StyleSheet.create({
-    item: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: dimens.itemPaddingVertical,
-    },
     itemActive: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
         paddingVertical: dimens.itemActivePaddingVertical,
     },
     itemInactive: {
+        maxWidth: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         gap: dimens.iconLabelGap,

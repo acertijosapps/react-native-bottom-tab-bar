@@ -1,6 +1,6 @@
-import type { BottomTabBarColors } from '../utils/interfaces';
+import type { ResolvedBottomTabBarColors } from '../utils/interfaces';
 
-export const defaultColors: BottomTabBarColors = {
+export const defaultColors: ResolvedBottomTabBarColors = {
     background: '#F4F1EA',
     surface: '#FFFFFF',
     border: '#E1E5E2',
@@ -8,4 +8,6 @@ export const defaultColors: BottomTabBarColors = {
     onAccent: '#FFF3E5',
     textMuted: '#5E6E68',
     shadow: '#000000',
+    badge: '#C8302A',
+    onBadge: '#FFFFFF',
 };

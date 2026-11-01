@@ -1,13 +1,40 @@
 import { dimens } from '../../styles';
-import { resolveSwipeDragOffset, resolveSwipeTargetIndex } from './tabSwipe';
+import { resolveSwipeDragOffset, resolveSwipeNeighbors, resolveSwipeTargetIndex } from './tabSwipe';
 
 const baseInput = {
-    currentIndex: 1,
-    routeCount: 3,
+    previousIndex: 0,
+    nextIndex: 2,
     translationX: 0,
     velocityX: 0,
     isRTL: false,
 };
+
+const firstTab = { previousIndex: null, nextIndex: 1 };
+const lastTab = { previousIndex: 1, nextIndex: null };
+const onlyTab = { previousIndex: null, nextIndex: null };
+
+describe('resolveSwipeNeighbors', () => {
+    const routeKeys = ['home', 'detail', 'events', 'settings'];
+
+    it.each([
+        ['middle tab without hidden tabs', 2, [], { previousIndex: 1, nextIndex: 3 }],
+        ['first tab', 0, [], { previousIndex: null, nextIndex: 1 }],
+        ['last tab', 3, [], { previousIndex: 2, nextIndex: null }],
+        ['skips a hidden tab forward', 0, ['detail'], { previousIndex: null, nextIndex: 2 }],
+        ['skips a hidden tab backward', 2, ['detail'], { previousIndex: 0, nextIndex: 3 }],
+        [
+            'no visible neighbor past hidden tabs',
+            3,
+            ['detail', 'events', 'home'],
+            { previousIndex: null, nextIndex: null },
+        ],
+        ['works from a hidden tab', 1, ['detail'], { previousIndex: 0, nextIndex: 2 }],
+    ])('%s', (_, currentIndex, hiddenRouteKeys, expected) => {
+        const neighbors = resolveSwipeNeighbors({ routeKeys, currentIndex, hiddenRouteKeys });
+
+        expect(neighbors).toEqual(expected);
+    });
+});
 
 describe('resolveSwipeTargetIndex', () => {
     it.each([
@@ -30,11 +57,12 @@ describe('resolveSwipeTargetIndex', () => {
             null,
         ],
         ['no horizontal movement stays', { translationX: 0, velocityX: -900 }, null],
-        ['swipe left on the last tab stays', { currentIndex: 2, translationX: -80 }, null],
-        ['swipe right on the first tab stays', { currentIndex: 0, translationX: 80 }, null],
+        ['swipe left on the last tab stays', { ...lastTab, translationX: -80 }, null],
+        ['swipe right on the first tab stays', { ...firstTab, translationX: 80 }, null],
         ['swipe left in RTL goes to the previous tab', { translationX: -80, isRTL: true }, 0],
         ['swipe right in RTL goes to the next tab', { translationX: 80, isRTL: true }, 2],
-        ['single tab never moves', { currentIndex: 0, routeCount: 1, translationX: -80 }, null],
+        ['single tab never moves', { ...onlyTab, translationX: -80 }, null],
+        ['jumps over a hidden tab', { previousIndex: 0, nextIndex: 3, translationX: -80 }, 3],
     ])('%s', (_, overrides, expected) => {
         const targetIndex = resolveSwipeTargetIndex({ ...baseInput, ...overrides });
 
@@ -56,17 +84,17 @@ describe('resolveSwipeDragOffset', () => {
         ],
         [
             'resists past the last tab',
-            { currentIndex: 2, translationX: -100 },
+            { ...lastTab, translationX: -100 },
             -100 * dimens.swipeEdgeResistance,
         ],
         [
             'resists past the first tab',
-            { currentIndex: 0, translationX: 100 },
+            { ...firstTab, translationX: 100 },
             100 * dimens.swipeEdgeResistance,
         ],
         [
             'resists on the first tab in RTL when dragging left',
-            { currentIndex: 0, translationX: -100, isRTL: true },
+            { ...firstTab, translationX: -100, isRTL: true },
             -100 * dimens.swipeEdgeResistance,
         ],
         ['stays put without movement', { translationX: 0 }, 0],

@@ -1,8 +1,17 @@
 import { dimens } from '../../styles';
 
-export type SwipeGestureInput = {
+export type SwipeNeighbors = {
+    previousIndex: number | null;
+    nextIndex: number | null;
+};
+
+export type SwipeNeighborsInput = {
+    routeKeys: string[];
     currentIndex: number;
-    routeCount: number;
+    hiddenRouteKeys: string[];
+};
+
+export type SwipeGestureInput = SwipeNeighbors & {
     translationX: number;
     velocityX: number;
     isRTL: boolean;
@@ -10,17 +19,34 @@ export type SwipeGestureInput = {
 
 export type SwipeDragInput = Omit<SwipeGestureInput, 'velocityX'>;
 
+const findVisibleIndex = (
+    { routeKeys, currentIndex, hiddenRouteKeys }: SwipeNeighborsInput,
+    step: number,
+): number | null => {
+    for (let index = currentIndex + step; index >= 0 && index < routeKeys.length; index += step) {
+        if (!hiddenRouteKeys.includes(routeKeys[index])) {
+            return index;
+        }
+    }
+
+    return null;
+};
+
+export const resolveSwipeNeighbors = (input: SwipeNeighborsInput): SwipeNeighbors => ({
+    previousIndex: findVisibleIndex(input, -1),
+    nextIndex: findVisibleIndex(input, 1),
+});
+
 const resolveNeighborIndex = ({
-    currentIndex,
-    routeCount,
+    previousIndex,
+    nextIndex,
     translationX,
     isRTL,
 }: SwipeDragInput): number | null => {
     'worklet';
-    const step = translationX < 0 ? 1 : -1;
-    const neighborIndex = currentIndex + (isRTL ? -step : step);
+    const isForward = translationX < 0 !== isRTL;
 
-    return neighborIndex >= 0 && neighborIndex < routeCount ? neighborIndex : null;
+    return isForward ? nextIndex : previousIndex;
 };
 
 export const resolveSwipeTargetIndex = (input: SwipeGestureInput): number | null => {
