@@ -6,8 +6,25 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-01
+
+### Added
+
+- `tabBarBadge` y `tabBarBadgeStyle`: badge sobre el icono, también anunciado por el lector de pantalla. Claves opcionales `badge` y `onBadge` en `BottomTabBarColors`.
+- `tabBarHideOnKeyboard`: oculta la barra mientras el teclado está abierto.
+- `tabBarShowLabel: false` y `tabBarLabelVisibilityMode: 'unlabeled'`: ocultan las etiquetas.
+- `tabBarButton`: botón propio por tab, como en la barra de bottom-tabs.
+
+### Fixed
+
+- `tabBarStyle: { display: 'none' }` ya oculta la barra en la pantalla enfocada.
+- Las tabs ocultas (`tabBarItemStyle: { display: 'none' }` o `tabBarButton` que devuelve `null`) ya no se dibujan, y el swipe de `SwipeableTabScreen` se las salta.
+- Las etiquetas largas o con texto de accesibilidad grande se cortan en una línea y crecen hasta 1.5×, sin descuadrar la barra.
+- La barra respeta los insets laterales (notch en horizontal).
+
 ### Changed
 
+- `peerDependencies`: `@react-navigation/bottom-tabs` y `@react-navigation/native` pasan de `>=7.0.0` a `^7.0.0`.
 - El repositorio se movió a GitHub: [acertijosapps/react-native-bottom-tab-bar](https://github.com/acertijosapps/react-native-bottom-tab-bar). `repository`, `bugs` y las imágenes del README apuntan ahí.
 
 ## [1.0.0] - 2026-10-11
